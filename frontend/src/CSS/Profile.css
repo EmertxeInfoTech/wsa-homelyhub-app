@@ -1,0 +1,69 @@
+/* User Profile */
+
+.profile {
+  display: flex;
+  margin-top: 2rem;
+}
+
+.avatar-profile {
+  height: 12rem;
+  width: 13rem;
+  border: 4px solid #090909;
+  border-radius: 50%;
+  background-color: white;
+}
+.userinfo {
+  margin-left: 6rem;
+}
+
+.user-info h4,
+h2 {
+  font-weight: 800;
+  margin-top: 2rem;
+  text-shadow: 2px 2px white;
+  letter-spacing: 2px;
+}
+
+.user-info p {
+  font-size: 1.1rem;
+}
+
+.btn {
+  background-color: #0e8b53;
+  border-color: #0e8b53;
+  color: white;
+  box-shadow: 2px 2px 10px rgb(183, 170, 170);
+  border-radius: 15px;
+  border-color: #8b8683;
+  width: 16rem;
+}
+
+.buttons {
+  display: flex;
+}
+.btn:hover {
+  background-color: rgba(177, 221, 184, 0.63);
+  border-color: rgb(2, 58, 11);
+  color: rgb(2, 58, 11);
+  font-weight: bold;
+}
+
+.update-btn {
+  background-color: #0e8b53;
+  border-color: #0e8b53;
+  color: white;
+  box-shadow: 2px 2px 10px rgb(183, 170, 170);
+  border-radius: 15px;
+  border-color: #8b8683;
+  width: 20rem;
+  margin-left: 20%;
+  font-size: larger;
+  margin-top: 2rem;
+}
+.rounded-circle {
+  width: 50%;
+  margin-left: 2rem;
+}
+.custom-file {
+  margin-right: 1rem;
+}
