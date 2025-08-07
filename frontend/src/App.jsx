@@ -25,7 +25,7 @@ import AccomodationForm from "./components/accomodation/AccomodationForm";
 import ForgetPassword from "./components/user/ForgetPassword";
 import ResetPassword from "./components/user/ResetPassword";
 import UpdatePassword from "./components/user/UpdatePassword";
-import { Payment } from "./components/payment/payment";
+import Payment from "./components/payment/Payment";
 import NotFound from "./components/NotFound";
 
 function App() {
