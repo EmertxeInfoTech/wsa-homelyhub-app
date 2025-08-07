@@ -1,10 +1,9 @@
 import "./App.css";
 import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Navigate,
+  BrowserRouter as Router,
+  Routes,
   Route,
-  RouterProvider,
+  Navigate,
 } from "react-router-dom";
 
 import PropertyList from "./components/home/PropertyList";
@@ -43,80 +42,60 @@ function App() {
     dispatch(currentUser());
   }, [dispatch]);
 
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route path="/" element={<Main />} id="main" exact>
-        <Route id="home" index element={<PropertyList />} />
-        <Route
-          path="propertylist/:id"
-          id="propertyListing"
-          element={<PropertyListing />}
-          exact
-        />
-        {/* Login */}
-        <Route id="login" path="login" element={<Login />} />
-        <Route id="signup" path="signup" element={<Signup />} />
-        <Route id="profile" path="profile" element={<Profile />} />
-        <Route
-          id="editprofile"
-          path="editprofile"
-          element={user ? <EditProfile /> : <Navigate to={"/login"} />}
-        />
-        {/* accomendation */}
-        <Route
-          id="accomodation"
-          path="accomodation"
-          element={<Accomodation />}
-        />
-        <Route
-          id="accomodationform"
-          path="accomodationform"
-          element={<AccomodationForm />}
-        />
-
-        <Route
-          id="forgotpassword"
-          path="user/forgotPassword"
-          element={<ForgetPassword />}
-        />
-
-        <Route
-          id="resetpassword"
-          path="user/resetPassword/:token"
-          element={<ResetPassword />}
-        />
-
-        <Route
-          id="updatepassword"
-          path="user/updatepassword"
-          element={user ? <UpdatePassword /> : <Navigate to={"/login"} />}
-        />
-
-        <Route
-          id="mybookings"
-          path="user/mybookings"
-          element={user ? <MyBookings /> : <Navigate to={"/login"} />}
-        />
-        <Route
-          id="bookingdetails"
-          path="user/mybookings/:bookingId"
-          element={user ? <BookingDetails /> : <Navigate to={"/login"} />}
-        />
-        <Route
-          id="payment"
-          path="payment/:propertyId"
-          element={user ? <Payment /> : <Navigate to={"/login"} />}
-        />
-        {/* Catch-all route for 404 Not Found - MUST be the last route */}
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    )
-  );
   return (
     <div className="App">
-      {/* <Home /> */}
       <Toaster position="bottom-center" reverseOrder={false} />
-      <RouterProvider router={router} />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Main />}>
+            <Route index element={<PropertyList />} />
+            <Route path="propertylist/:id" element={<PropertyListing />} />
+
+            {/* User routes */}
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="profile" element={<Profile />} />
+            <Route
+              path="editprofile"
+              element={user ? <EditProfile /> : <Navigate to="/login" />}
+            />
+
+            {/* Accommodation routes */}
+            <Route path="accomodation" element={<Accomodation />} />
+            <Route path="accomodationform" element={<AccomodationForm />} />
+
+            {/* Password routes */}
+            <Route path="user/forgotPassword" element={<ForgetPassword />} />
+            <Route
+              path="user/resetPassword/:token"
+              element={<ResetPassword />}
+            />
+            <Route
+              path="user/updatepassword"
+              element={user ? <UpdatePassword /> : <Navigate to="/login" />}
+            />
+
+            {/* Booking routes */}
+            <Route
+              path="user/mybookings"
+              element={user ? <MyBookings /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="user/mybookings/:bookingId"
+              element={user ? <BookingDetails /> : <Navigate to="/login" />}
+            />
+
+            {/* Payment route */}
+            <Route
+              path="payment/:propertyId"
+              element={user ? <Payment /> : <Navigate to="/login" />}
+            />
+
+            {/* 404 Not Found - Must be last */}
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </Router>
     </div>
   );
 }

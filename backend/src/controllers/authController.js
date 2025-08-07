@@ -84,13 +84,28 @@ const login = async (req, res) => {
 };
 
 const logout = (req, res) => {
-  res.cookie("jwt", "loggedout", {
-    expires: new Date(Date.now() + 10 * 100),
+  const cookieOptions = {
+    expires: new Date(0), // Expire immediately
     httpOnly: true,
-  });
-  res.status(200).json({ status: "success" });
-};
+    path: "/",
+  };
 
+  // Add cross-origin settings for production (when frontend and backend are on different domains)
+  if (process.env.NODE_ENV === "production") {
+    cookieOptions.sameSite = "none";
+    cookieOptions.secure = true;
+  } else {
+    cookieOptions.sameSite = "lax";
+    cookieOptions.secure = false;
+  }
+
+  res.cookie("jwt", "", cookieOptions);
+
+  res.status(200).json({
+    status: "success",
+    message: "Logged out successfully",
+  });
+};
 const protect = async (req, res, next) => {
   try {
     //1) Getting the token and check if it is there
