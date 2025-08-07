@@ -9,7 +9,14 @@ import { bookingRouter } from "./routes/bookingRouter.js";
 
 dotenv.config();
 const app = express();
-app.use(cors({ origin: process.env.ORIGIN_ACCESS_URL, credentials: true }));
+app.use(
+  cors({
+    origin:
+      process.env.ORIGIN_ACCESS_URL &&
+      process.env.ORIGIN_ACCESS_URL.split(",").map((url) => url.trim()),
+    credentials: true,
+  })
+);
 app.use(express.json({ limit: "100mb" })); // ✅ Fix here
 app.use(express.urlencoded({ limit: "100mb", extended: true }));
 app.use(cookieParser());
