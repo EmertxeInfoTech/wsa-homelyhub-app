@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 
-export const Payment = () => {
+export default Payment = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { propertyId } = useParams();
