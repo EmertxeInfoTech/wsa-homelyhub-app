@@ -11,8 +11,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
-
-export default Payment = () => {
+const Payment = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { propertyId } = useParams();
@@ -168,3 +167,5 @@ export default Payment = () => {
     </div>
   );
 };
+
+export default Payment;
