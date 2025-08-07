@@ -16,6 +16,7 @@ export const Payment = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { propertyId } = useParams();
+
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const {
     checkinDate,
@@ -45,20 +46,28 @@ export const Payment = () => {
       return;
     }
 
-    dispatch(
-      initiateCheckoutSession({
+    try {
+      const paymentData = {
         amount: totalPrice,
         currency: "INR",
         propertyId,
         fromDate: checkinDate,
         toDate: checkoutDate,
-        guests: guests,
-      })
-    );
+        guests,
+      };
+
+      // Dispatch and wait for payment initiation
+      await dispatch(initiateCheckoutSession(paymentData));
+
+      // Razorpay will open in useEffect once orderData is available
+    } catch (error) {
+      toast.error("Payment initiation failed");
+      console.error("Payment initiation failed", error);
+    }
   };
 
   useEffect(() => {
-    if (!orderData) return;
+    if (!orderData || !orderData.orderId || !orderData.keyId) return;
 
     const options = {
       key: orderData.keyId,
@@ -80,19 +89,20 @@ export const Payment = () => {
                 propertyId,
                 fromDate: checkinDate,
                 toDate: checkoutDate,
-                guests: guests,
+                guests,
                 totalAmount: totalPrice,
               },
             })
           );
+
           toast.success("Booking confirmed! Redirecting...");
-          navigate("/user/mybookings");
+          // Use timeout for smoother transition
+          setTimeout(() => navigate("/user/mybookings"), 1000);
         } catch (error) {
           toast.error("Payment verification failed");
           navigate("/");
         }
       },
-
       prefill: {
         name: user.name,
         email: user.email,
@@ -114,7 +124,7 @@ export const Payment = () => {
 
     const razorpay = new window.Razorpay(options);
     razorpay.open();
-  }, [orderData, dispatch]);
+  }, [orderData]);
 
   return (
     <div className="booking-container">
