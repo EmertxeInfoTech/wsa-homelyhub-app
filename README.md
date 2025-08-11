@@ -35,9 +35,11 @@ It allows users to browse properties, search/filter listings, book stays, manage
 
 ---
 ## Screenshot:
-![App Screenshot](frontend/public/wsa-homelyhub-app-screenshot.jpg)
----
-**Live Demo** : [Click here to view the app](https://wsa-homelyhub-app.netlify.app/)
+![App Screenshot](frontend/public/readme/wsa-homelyhub-app-screenshot.jpg)
+
+ **Live Demo** : [Click here to view the app](https://wsa-homelyhub-app.netlify.app/)
+
+
 ---
 ## 📁 Folder Structure
 ├── frontend<br>
